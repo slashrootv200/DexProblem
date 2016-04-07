@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="in.curium.myapp.myapp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+  <application
+      android:name=".App"
+      android:allowBackup="true"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name"
+      android:supportsRtl="true"
+      android:theme="@style/AppTheme">
+    <activity android:name=".MainActivity">
+
+    </activity>
+    <activity
+        android:name=".PersonActivity"
+        android:label="@string/title_activity_person"
+        />
+    <activity
+        android:name=".FragmentTestActivity"
+        android:label="@string/title_activity_fragment_test"
+        />
+    <activity
+        android:name=".TextViewButtonActivity"
+        android:label="Text and Button"
+        >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+  </application>
+
+</manifest>

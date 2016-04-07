@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+repositories {
+  mavenCentral()
+  jcenter()
+  maven { url "https://clojars.org/repo/" }
+}
+
+android {
+  compileSdkVersion 23
+  buildToolsVersion "23.0.3"
+
+  defaultConfig {
+    applicationId "in.curium.myapp.myapp"
+    minSdkVersion 16
+    targetSdkVersion 23
+    versionCode 1
+    versionName "1.0"
+    // Enabling multidex support.
+    multiDexEnabled true
+    testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+  packagingOptions {
+    exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+    exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+  }
+}
+
+dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  testCompile 'junit:junit:4.12'
+  // okhttp mock server
+  testCompile 'com.squareup.okhttp3:mockwebserver:3.2.0'
+
+  // multi dex support
+  compile 'com.android.support:multidex:1.0.1'
+
+  // auto parcel
+  provided 'frankiesardo:auto-parcel:1.0.1'
+  apt 'frankiesardo:auto-parcel:1.0.1'
+
+  compile 'com.android.support:appcompat-v7:23.1.1'
+  // okhttp client
+  compile 'com.squareup.okhttp3:okhttp:3.2.0'
+  // okio
+  compile 'com.squareup.okio:okio:1.6.0'
+  // okhttp logging
+  compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+  // retrofit client
+  compile 'com.squareup.retrofit2:retrofit:2.0.0'
+  // retrofit gson converter
+  compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+  // picasso
+  compile 'com.squareup.picasso:picasso:2.5.2'
+  // downloader or picasso
+  compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
+
+  compile 'com.android.support:design:23.1.1'
+
+//  androidTestCompile('com.android.support:multidex-instrumentation:1.0.1') {
+//    exclude group: 'com.android.support', module: 'multidex'
+//  }
+
+  // butter knife
+  compile 'com.jakewharton:butterknife:7.0.1'
+
+  // Android JUnit Runner
+  androidTestCompile('com.android.support.test:runner:0.5') {
+    // Necessary if your app targets Marshmallow (since the test runner
+    // hasn't moved to Marshmallow yet)
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
+
+  // JUnit4 Rules
+  androidTestCompile 'com.android.support.test:rules:0.5'
+
+  // Espresso core
+  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
+    // Necessary if your app targets Marshmallow (since Espresso
+    // hasn't moved to Marshmallow yet)
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
+  // Espresso-contrib for DatePicker, RecyclerView, Drawer actions, Accessibility checks, CountingIdlingResource
+  androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.2') {
+    exclude group: 'com.android.support', module: 'appcompat'
+    exclude module: 'support-annotations'
+    exclude module: 'support-v4'
+    exclude module: 'recyclerview-v7'
+  }
+  // Espresso-web for WebView support
+  androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2.2'
+  // Espresso-idling-resource for synchronization with background jobs
+  androidTestCompile 'com.android.support.test.espresso:espresso-idling-resource:2.2.2'
+}
